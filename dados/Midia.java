@@ -9,9 +9,31 @@ public abstract class Midia {
 	private int ano;
 
 	public Midia(int codigo, String titulo, int ano, Categoria categoria) {
-
+		this.codigo = codigo;
+		this.titulo=titulo;
+		this.ano=ano;
 	}
 
+	
+
 	public abstract double calculaLocacao();
+
+
+
+	public int getCodigo() {
+		return codigo;
+	}
+
+
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+
+
+	public int getAno() {
+		return ano;
+	}
 
 }
