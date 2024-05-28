@@ -13,11 +13,11 @@ public enum Categoria {
 	private String nome;
 
 	private Categoria(String nome) {
-
+		this.nome=nome;
 	}
 
 	public String getNome() {
-		return null;
+		return nome;
 	}
 
 }
