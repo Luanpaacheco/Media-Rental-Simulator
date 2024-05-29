@@ -23,4 +23,14 @@ public class Musica extends Midia {
 		}else return duracao*0.3;
 	}
 
+	public double getDuracao() {
+		return duracao;
+	}
+
+	public Categoria getCa() {
+		return ca;
+	}
+
+	
+
 }
