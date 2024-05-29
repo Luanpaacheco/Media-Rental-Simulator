@@ -22,4 +22,16 @@ public class Video extends Midia {
 
 	
 
+	public int getQualidade() {
+		return qualidade;
+	}
+
+	public String getCa() {
+		return ca.getNome();
+	}
+
+	
+
+	
+
 }
