@@ -27,8 +27,8 @@ public class Musica extends Midia {
 		return duracao;
 	}
 
-	public Categoria getCa() {
-		return ca;
+	public String getCa() {
+		return ca.getNome();
 	}
 
 	

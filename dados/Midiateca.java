@@ -12,6 +12,14 @@ public class Midiateca implements Iterador {
 		midias=new ArrayList<>();
 	}
 
+	
+
+	public ArrayList<Midia> getMidias() {
+		return midias;
+	}
+
+
+
 	public boolean cadastraMidia(Midia jogo) {
 		if(consultaPorCodigo(jogo.getCodigo())==null){
 			midias.add(jogo);	

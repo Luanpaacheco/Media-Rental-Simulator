@@ -2,7 +2,9 @@ package app;
 
 import java.util.Scanner;
 
+//import package dados;
 import dados.Categoria;
+import dados.Midia;
 import dados.Midiateca;
 import dados.Musica;
 import dados.Video;
@@ -18,8 +20,8 @@ public class ACMEMidia {
 	}
 
 	public void executa() {
-		//1//CadastraVideo();
-		//2//CadastraMusica();
+		CadastraVideo();
+		CadastraMusica();
 		MostraDadosDeMidia();
 		// 4MostraDadosDeMidiaPorCategoria();
 		// 5MostraDadosDeVideoPorQualidade();
@@ -95,7 +97,25 @@ public class ACMEMidia {
 	}
 
 	public void MostraDadosDeMidia(){
-		
+		int codigo= sc.nextInt();
+		if(midiateca.consultaPorCodigo(codigo)==null){
+			System.out.println("3:Codigo inexistente.");
+		}else 
+			for(Midia a : midiateca.getMidias()){
+				if(a.getCodigo()==codigo){ 
+					if(a instanceof Video){
+						Video video = (Video)a;
+						System.out.println("1:" + video.getCodigo() + ", " + video.getTitulo() + ", " + video.getAno() + ", "
+						+ video.getAno() + ", " + video.getCa() + ", " + video.getQualidade()+", "+video.calculaLocacao());
+					}else {
+						Musica musica = (Musica) a;
+						System.out.println("2:" + musica.getCodigo() + ", " + musica.getTitulo() + ", " + musica.getAno() + ", "
+						+ musica.getAno() + ", " + musica.getCa() + ", " + musica.getDuracao()+", "+ musica.calculaLocacao());
+					}
+						
+			}
+		}
+
 	}
 
 }
