@@ -18,6 +18,10 @@ public class Midiateca implements Iterador {
 		return midias;
 	}
 
+	public void remove(Midia a){
+		midias.remove(a);
+	}
+
 
 
 	public boolean cadastraMidia(Midia jogo) {
@@ -80,21 +84,7 @@ public class Midiateca implements Iterador {
 			return midiasQualidade;
 	}
 
-	public ArrayList<Musica> consultaPorDuracao(double duracao) {
-		ArrayList<Musica>midiasDuracao=new ArrayList<>();
-		for(Midia a : midias){
-			if(a instanceof Musica ){
-				if(((Musica)a).getDuracao()==duracao){
-					midiasDuracao.add((Musica) a);
-				}
-			}
-		}
-		if(midiasDuracao.isEmpty())
-			return null;
-		else 
-			return midiasDuracao;
-	}
-
+	
 
 	/**
 	 * @see dados.Iterador#reset()
