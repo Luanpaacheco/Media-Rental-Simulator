@@ -150,13 +150,13 @@ public class ACMEMidia {
 	public void RemoverMidia(){
 		System.out.println("digite um codigo");
 		int codigo = sc.nextInt();
-		if(midiateca.consultaPorCodigo(codigo)==null){
+		if(!(midiateca.removeMidia(codigo))){
 			System.out.println("7:Codigo inexistente");
 		}else {
 			for(Midia a : midiateca.getMidias()){
 				if(a.equals(midiateca.consultaPorCodigo(codigo))){
 					TestaObj(a, 7);
-					midiateca.remove(a);
+					midiateca.removeMidia(codigo);
 				}
 			}
 		}
