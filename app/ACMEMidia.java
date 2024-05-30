@@ -23,7 +23,7 @@ public class ACMEMidia {
 		CadastraVideo();
 		CadastraMusica();
 		MostraDadosDeMidia();
-		// 4MostraDadosDeMidiaPorCategoria();
+		MostraDadosDeMidiaPorCategoria();
 		// 5MostraDadosDeVideoPorQualidade();
 		// 6MostraDadosDdeMusicPorDuracao();
 		// 7RemoverMidia();
@@ -103,19 +103,55 @@ public class ACMEMidia {
 		}else 
 			for(Midia a : midiateca.getMidias()){
 				if(a.getCodigo()==codigo){ 
-					if(a instanceof Video){
-						Video video = (Video)a;
-						System.out.println("1:" + video.getCodigo() + ", " + video.getTitulo() + ", " + video.getAno() + ", "
-						+ video.getAno() + ", " + video.getCa() + ", " + video.getQualidade()+", "+video.calculaLocacao());
-					}else {
-						Musica musica = (Musica) a;
-						System.out.println("2:" + musica.getCodigo() + ", " + musica.getTitulo() + ", " + musica.getAno() + ", "
-						+ musica.getAno() + ", " + musica.getCa() + ", " + musica.getDuracao()+", "+ musica.calculaLocacao());
-					}
-						
+					TestaObj(a,2);		
 			}
 		}
 
+	}
+
+	public void MostraDadosDeMidiaPorCategoria(){
+		Categoria cat= Categoria.valueOf(sc.nextLine());;
+		if(midiateca.consultaPorCategoria(cat)==null){
+			System.out.println("3:Codigo inexistente.");
+		}else 
+			for(Midia a : midiateca.getMidias()){
+				if(a.getCategoria()==cat){ 
+					TestaObj(a,2);		
+			}
+		}
+	}
+
+	public void MostraDadosDeMidiaPorCategoria(){
+		Categoria cat= Categoria.valueOf(sc.nextLine());;
+		if(midiateca.consultaPorCategoria(cat)==null){
+			System.out.println("3:Codigo inexistente.");
+		}else 
+			for(Midia a : midiateca.getMidias()){
+				if(a.getCategoria()==cat){ 
+					TestaObj(a,2);		
+			}
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+	public void TestaObj(Midia x,int n){
+		if(x instanceof Video){
+			Video video = (Video)x;
+			System.out.println(n+":" + video.getCodigo() + ", " + video.getTitulo() + ", " + video.getAno() + ", "
+			+ video.getAno() + ", " + video.getCa() + ", " + video.getQualidade()+", "+video.calculaLocacao());
+		}else  {
+			Musica musica = (Musica) x;
+			System.out.println(n+":" + musica.getCodigo() + ", " + musica.getTitulo() + ", " + musica.getAno() + ", "
+			+ musica.getAno() + ", " + musica.getCa() + ", " + musica.getDuracao()+", "+ musica.calculaLocacao());
+		}
 	}
 
 }

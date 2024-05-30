@@ -70,7 +70,7 @@ public class Midiateca implements Iterador {
 	 * @see dados.Iterador#reset()
 	 */
 	public void reset() {
-
+		contador = 0;
 	}
 
 
@@ -78,7 +78,7 @@ public class Midiateca implements Iterador {
 	 * @see dados.Iterador#hasNext()
 	 */
 	public boolean hasNext() {
-		return false;
+		return contador<midias.size();
 	}
 
 
@@ -86,7 +86,14 @@ public class Midiateca implements Iterador {
 	 * @see dados.Iterador#next()
 	 */
 	public Object next() {
-		return null;
-	}
+		if (hasNext()) {
+            Midia midiaElemento = midias.get(contador);
+            contador++;
+            return midiaElemento;
+        }
+        // Aqui você pode lançar uma exceção ou retornar null, dependendo do que deseja fazer
+        return null;
+    }
+
 
 }
