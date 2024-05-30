@@ -65,6 +65,21 @@ public class Midiateca implements Iterador {
 			return true;*/
 	}
 
+	public ArrayList<Video> consultaPorQualidade(int qualidade) {
+		ArrayList<Video>midiasQualidade=new ArrayList<>();
+		for(Midia a : midias){
+			if(a instanceof Video ){
+				if(((Video)a).getQualidade()==qualidade){
+					midiasQualidade.add((Video) a);
+				}
+			}
+		}
+		if(midiasQualidade.isEmpty())
+			return null;
+		else 
+			return midiasQualidade;
+}
+
 
 	/**
 	 * @see dados.Iterador#reset()

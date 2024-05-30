@@ -24,7 +24,7 @@ public class ACMEMidia {
 		CadastraMusica();
 		MostraDadosDeMidia();
 		MostraDadosDeMidiaPorCategoria();
-		// 5MostraDadosDeVideoPorQualidade();
+		MostraDadosDeVideoPorQualidade();
 		// 6MostraDadosDdeMusicPorDuracao();
 		// 7RemoverMidia();
 		// 8MostrarSomatorioDeLocacao();
@@ -121,17 +121,17 @@ public class ACMEMidia {
 		}
 	}
 
-	public void MostraDadosDeMidiaPorCategoria(){
-		Categoria cat= Categoria.valueOf(sc.nextLine());;
-		if(midiateca.consultaPorCategoria(cat)==null){
-			System.out.println("3:Codigo inexistente.");
+	public void MostraDadosDeVideoPorQualidade(){
+		int qualidade= sc.nextInt();;
+		if(midiateca.consultaPorQualidade(qualidade)==null){
+			System.out.println("5:Codigo inexistente.");
 		}else 
-			for(Midia a : midiateca.getMidias()){
-				if(a.getCategoria()==cat){ 
-					TestaObj(a,2);		
+			for(Video video : midiateca.consultaPorQualidade(qualidade) ){
+				System.out.println("5:" + video.getCodigo() + ", " + video.getTitulo() + ", " + video.getAno() + ", "
+				+ video.getAno() + ", " + video.getCa() + ", " + video.getQualidade()+", "+video.calculaLocacao());
 			}
 		}
-	}
+	
 
 
 
@@ -153,5 +153,6 @@ public class ACMEMidia {
 			+ musica.getAno() + ", " + musica.getCa() + ", " + musica.getDuracao()+", "+ musica.calculaLocacao());
 		}
 	}
-
 }
+
+
