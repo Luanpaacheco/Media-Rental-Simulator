@@ -25,7 +25,7 @@ public class ACMEMidia {
 		MostraDadosDeMidia();
 		MostraDadosDeMidiaPorCategoria();
 		MostraDadosDeVideoPorQualidade();
-		// 6MostraDadosDdeMusicPorDuracao();
+		MostraDadosDdeMusicPorDuracao();
 		// 7RemoverMidia();
 		// 8MostrarSomatorioDeLocacao();
 	}
@@ -103,7 +103,7 @@ public class ACMEMidia {
 		}else 
 			for(Midia a : midiateca.getMidias()){
 				if(a.getCodigo()==codigo){ 
-					TestaObj(a,2);		
+					TestaObj(a,4);		
 			}
 		}
 
@@ -112,11 +112,11 @@ public class ACMEMidia {
 	public void MostraDadosDeMidiaPorCategoria(){
 		Categoria cat= Categoria.valueOf(sc.nextLine());;
 		if(midiateca.consultaPorCategoria(cat)==null){
-			System.out.println("3:Codigo inexistente.");
+			System.out.println("4:Codigo inexistente.");
 		}else 
 			for(Midia a : midiateca.getMidias()){
 				if(a.getCategoria()==cat){ 
-					TestaObj(a,2);		
+					TestaObj(a,4);		
 			}
 		}
 	}
@@ -131,6 +131,17 @@ public class ACMEMidia {
 				+ video.getAno() + ", " + video.getCa() + ", " + video.getQualidade()+", "+video.calculaLocacao());
 			}
 		}
+
+		public void MostraDadosDdeMusicPorDuracao(){
+			double duracao= sc.nextDouble();;
+			if(midiateca.consultaPorDuracao(duracao)==null){
+				System.out.println("6:Codigo inexistente.");
+			}else 
+				for(Musica musica : midiateca.consultaPorDuracao(duracao) ){
+					System.out.println("6:" + musica.getCodigo() + ", " + musica.getTitulo() + ", " + musica.getAno() + ", "
+					+ musica.getAno() + ", " + musica.getCa() + ", " + musica.getDuracao()+", "+ musica.calculaLocacao());
+				}
+			}
 	
 
 

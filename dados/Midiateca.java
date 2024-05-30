@@ -78,7 +78,22 @@ public class Midiateca implements Iterador {
 			return null;
 		else 
 			return midiasQualidade;
-}
+	}
+
+	public ArrayList<Musica> consultaPorDuracao(double duracao) {
+		ArrayList<Musica>midiasDuracao=new ArrayList<>();
+		for(Midia a : midias){
+			if(a instanceof Musica ){
+				if(((Musica)a).getDuracao()==duracao){
+					midiasDuracao.add((Musica) a);
+				}
+			}
+		}
+		if(midiasDuracao.isEmpty())
+			return null;
+		else 
+			return midiasDuracao;
+	}
 
 
 	/**
