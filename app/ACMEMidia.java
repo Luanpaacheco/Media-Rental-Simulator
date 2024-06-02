@@ -15,13 +15,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.PrintStream;
 import java.nio.charset.Charset;
+import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class ACMEMidia {
 
 	private Midiateca midiateca;
-	private Scanner sc;
+	//private Scanner sc;
 	 // Atributos para redirecionamento de E/S
 	 private Scanner entrada = new Scanner(System.in);  // Atributo para entrada de dados
 	 private PrintStream saidaPadrao = System.out;   // Guarda a saida padrao - tela (console)
@@ -36,13 +37,13 @@ public class ACMEMidia {
 
 	public void executa() {
 		CadastraVideo();
-		//CadastraMusica();
-		//MostraDadosDeMidia();
-		//MostraDadosDeMidiaPorCategoria();
-		//MostraDadosDeVideoPorQualidade();
-		//MostraDadosDeMusicaPorDuracao();
-		//RemoverMidia();
-		//MostrarSomatorioDeLocacao();
+		CadastraMusica();
+		MostraDadosDeMidia();
+		MostraDadosDeMidiaPorCategoria();
+		MostraDadosDeVideoPorQualidade();
+		MostraDadosDeMusicaPorDuracao();
+		RemoverMidia();
+		MostrarSomatorioDeLocacao();
 	}
 
 	public void CadastraVideo() {
@@ -67,8 +68,8 @@ public class ACMEMidia {
 			qualidade = entrada.nextInt();
 			Video video = new Video(codigo, titulo, ano, cat, qualidade);
 			if (midiateca.cadastraMidia(video)) {
-				System.out.println("1:" + video.getCodigo() + ", " + video.getTitulo() + ", " + video.getAno() + ", "
-						 + ", " + video.getCa() + ", " + video.getQualidade());
+				System.out.println("1:" + video.getCodigo() + "," + video.getTitulo() + "," + video.getAno() 
+						 + "," + video.getCa() + "," + video.getQualidade());
 			} else
 				System.out.println("1: Erro-video com codigo repetido " + codigo);
 			//System.out.println("digite codigo");
@@ -100,8 +101,7 @@ public class ACMEMidia {
 			duracao = entrada.nextDouble();
 			Musica musica = new Musica(codigo, titulo, ano, cat, duracao);
 			if (midiateca.cadastraMidia(musica)) {
-				System.out.println("2:" + musica.getCodigo() + ", " + musica.getTitulo() + ", " + musica.getAno() + ", "
-						 + ", " + musica.getCa() + ", " + musica.getDuracao());
+				System.out.println("2:" + musica.getCodigo() + "," + musica.getTitulo() + "," + musica.getAno() +  "," + musica.getCa() + "," + musica.getDuracao());
 			} else
 				System.out.println("2: Erro-musica com codigo repetido " + codigo);
 			//System.out.println("digite codigo");
@@ -118,63 +118,80 @@ public class ACMEMidia {
 		}else 
 			for(Midia a : midiateca.getMidias()){
 				if(a.getCodigo()==codigo){ 
-					TestaObj(a,4);		
+					TestaObj(a,3);		
 			}
 		}
 
 	}
 
 	public void MostraDadosDeMidiaPorCategoria(){
-		Categoria cat= Categoria.valueOf(entrada.nextLine());;
+		try{
+			entrada.nextLine();
+		Categoria cat= Categoria.valueOf(entrada.nextLine());
 		if(midiateca.consultaPorCategoria(cat)==null){
 			System.out.println("4:Codigo inexistente.");
 		}else 
 			for(Midia a : midiateca.getMidias()){
-				if(a.getCategoria()==cat){ 
+				if(a.getCategoria().equals(cat)){ 
 					TestaObj(a,4);		
 			}
 		}
+		}catch(Exception e ){
+			System.out.println("4:Codigo inexistente.");
+		}
+		
 	}
 
 	public void MostraDadosDeVideoPorQualidade(){
-		int qualidade= entrada.nextInt();;
+		try{
+			int qualidade= entrada.nextInt();;
 		if(midiateca.consultaPorQualidade(qualidade)==null){
 			System.out.println("5:Codigo inexistente.");
 		}else 
 			for(Video video : midiateca.consultaPorQualidade(qualidade) ){
-				System.out.println("5:" + video.getCodigo() + ", " + video.getTitulo() + ", " + video.getAno() + ", "
-				+ video.getAno() + ", " + video.getCa() + ", " + video.getQualidade()+", "+video.calculaLocacao());
+				System.out.println("5:" + video.getCodigo() + "," + video.getTitulo() + "," + video.getAno() + ","
+				 + video.getCa() + "," + video.getQualidade()+","+video.calculaLocacao());
 			}
+		}catch(Exception e){
+			System.out.println("erro");
+		}
+		
 		}
 
 	public void MostraDadosDeMusicaPorDuracao(){
-		Musica maior=null;
-		if(!(midiateca.getMidias().isEmpty())){ 
-			for(Midia a : midiateca.getMidias()){
-				if(a instanceof Musica){
-					if(maior==null||((Musica)a).getDuracao()>maior.getDuracao()){
-						maior=(Musica)a;
+		try{
+			Musica maior=null;
+			if(!(midiateca.getMidias().isEmpty())){ 
+				for(Midia a : midiateca.getMidias()){
+					if(a instanceof Musica){
+						if(maior==null||((Musica)a).getDuracao()>maior.getDuracao()){
+							maior=(Musica)a;
+						}
 					}
 				}
-			}
-			System.out.println("6:" + maior.getTitulo()+","+maior.getDuracao());
-		}else 
+				System.out.println("6:" + maior.getTitulo()+","+maior.getDuracao());
+			}else 
+				System.out.println("6:Nenhuma música encontrada.");
+		}catch(Exception e){
 			System.out.println("6:Nenhuma música encontrada.");
+		}
+		
 	}
 
 	public void RemoverMidia(){
 		//System.out.println("digite um codigo");
-		int codigo = entrada.nextInt();
-		if(!(midiateca.removeMidia(codigo))){
-			System.out.println("7:Codigo inexistente");
-		}else {
-			for(Midia a : midiateca.getMidias()){
-				if(a.equals(midiateca.consultaPorCodigo(codigo))){
-					TestaObj(a, 7);
-					midiateca.removeMidia(codigo);
-				}
-			}
+		try{
+			int codigo = entrada.nextInt();
+			
+			if(midiateca.consultaPorCodigo(codigo)!=null){
+				TestaObj(midiateca.consultaPorCodigo(codigo), 7);
+				midiateca.removeMidia(codigo);
+				
+			}else System.out.println("7:erro");
+		}catch(Exception e){
+			System.out.println("erro"+ e.getMessage()+" "+e.getLocalizedMessage());
 		}
+		
 	}
 
 	public void MostrarSomatorioDeLocacao(){
@@ -195,14 +212,15 @@ public class ACMEMidia {
 	}
 
 	public void TestaObj(Midia x,int n){
+		DecimalFormat deci=new DecimalFormat("0.00");
 		if(x instanceof Video){
 			Video video = (Video)x;
-			System.out.println(n+":" + video.getCodigo() + "," + video.getTitulo() + "," + video.getAno() + ","
-			+ ", " + video.getCa() + "," + video.getQualidade()+","+video.calculaLocacao());
+			System.out.println(n+":" + video.getCodigo() + "," + video.getTitulo() + "," + video.getAno() 
+			+ "," + video.getCa() + "," + video.getQualidade()+","+deci.format(video.calculaLocacao()));
 		}else  {
 			Musica musica = (Musica) x;
-			System.out.println(n+":" + musica.getCodigo() + "," + musica.getTitulo() + "," + musica.getAno() + ","
-			 + ", " + musica.getCa() + "," + musica.getDuracao()+","+ musica.calculaLocacao());
+			System.out.println(n+":" + musica.getCodigo() + "," + musica.getTitulo() + "," + musica.getAno()
+			 + "," + musica.getCa() + "," + musica.getDuracao()+","+ deci.format(musica.calculaLocacao()));
 		}
 	}
 

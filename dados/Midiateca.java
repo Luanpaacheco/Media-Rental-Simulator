@@ -18,7 +18,7 @@ public class Midiateca implements Iterador {
 		return midias;
 	}
 
-	public void remove(Midia a){
+	public void removes(Midia a){
 		midias.remove(a);
 	}
 
