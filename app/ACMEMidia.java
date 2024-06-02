@@ -9,25 +9,40 @@ import dados.Midiateca;
 import dados.Musica;
 import dados.Video;
 
+// Imports
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.PrintStream;
+import java.nio.charset.Charset;
+import java.util.Locale;
+import java.util.Scanner;
+
 public class ACMEMidia {
 
 	private Midiateca midiateca;
 	private Scanner sc;
+	 // Atributos para redirecionamento de E/S
+	 private Scanner entrada = new Scanner(System.in);  // Atributo para entrada de dados
+	 private PrintStream saidaPadrao = System.out;   // Guarda a saida padrao - tela (console)
+	 private final String nomeArquivoEntrada = "entrada.txt";  // Nome do arquivo de entrada de dados
+	 private final String nomeArquivoSaida = "saida.txt";  // Nome do arquivo de saida de dados
 
 	public ACMEMidia() {
 		midiateca = new Midiateca();
-		sc = new Scanner(System.in);
+		//sc = new Scanner(System.in);
+		redirecionaES();
 	}
 
 	public void executa() {
 		CadastraVideo();
-		CadastraMusica();
-		MostraDadosDeMidia();
+		//CadastraMusica();
+		//MostraDadosDeMidia();
 		//MostraDadosDeMidiaPorCategoria();
 		//MostraDadosDeVideoPorQualidade();
 		//MostraDadosDeMusicaPorDuracao();
 		//RemoverMidia();
-		MostrarSomatorioDeLocacao();
+		//MostrarSomatorioDeLocacao();
 	}
 
 	public void CadastraVideo() {
@@ -35,29 +50,29 @@ public class ACMEMidia {
 		int ano;
 		Categoria cat;
 		int qualidade;
-		System.out.println("digite codigo");
-		int codigo = sc.nextInt();
+		//System.out.println("digite codigo");
+		int codigo = entrada.nextInt();
 
 		while (codigo != -1) {
 
-			sc.nextLine();
-			System.out.println("digite titulo");
-			titulo = sc.nextLine();
-			System.out.println("digite o ano");
-			ano = sc.nextInt();
-			sc.nextLine();
-			System.out.println("digite a categoria");
-			cat = Categoria.valueOf(sc.nextLine());
-			System.out.println("digite qualidade");
-			qualidade = sc.nextInt();
+			entrada.nextLine();
+			//System.out.println("digite titulo");
+			titulo = entrada.nextLine();
+			//System.out.println("digite o ano");
+			ano = entrada.nextInt();
+			entrada.nextLine();
+			//System.out.println("digite a categoria");
+			cat = Categoria.valueOf(entrada.nextLine());
+			//System.out.println("digite qualidade");
+			qualidade = entrada.nextInt();
 			Video video = new Video(codigo, titulo, ano, cat, qualidade);
 			if (midiateca.cadastraMidia(video)) {
 				System.out.println("1:" + video.getCodigo() + ", " + video.getTitulo() + ", " + video.getAno() + ", "
 						 + ", " + video.getCa() + ", " + video.getQualidade());
 			} else
 				System.out.println("1: Erro-video com codigo repetido " + codigo);
-			System.out.println("digite codigo");
-			codigo = sc.nextInt();
+			//System.out.println("digite codigo");
+			codigo = entrada.nextInt();
 
 		}
 
@@ -68,36 +83,36 @@ public class ACMEMidia {
 		int ano;
 		Categoria cat;
 		double duracao;
-		System.out.println("digite codigo");
-		int codigo = sc.nextInt();
+		//System.out.println("digite codigo");
+		int codigo = entrada.nextInt();
 
 		while (codigo != -1) {
 
-			sc.nextLine();
-			System.out.println("digite titulo");
-			titulo = sc.nextLine();
-			System.out.println("digite o ano");
-			ano = sc.nextInt();
-			sc.nextLine();
-			System.out.println("digite a categoria");
-			cat = Categoria.valueOf(sc.nextLine());
-			System.out.println("digite duracao");
-			duracao = sc.nextDouble();
+			entrada.nextLine();
+			//System.out.println("digite titulo");
+			titulo = entrada.nextLine();
+			//System.out.println("digite o ano");
+			ano = entrada.nextInt();
+			entrada.nextLine();
+			//System.out.println("digite a categoria");
+			cat = Categoria.valueOf(entrada.nextLine());
+			//System.out.println("digite duracao");
+			duracao = entrada.nextDouble();
 			Musica musica = new Musica(codigo, titulo, ano, cat, duracao);
 			if (midiateca.cadastraMidia(musica)) {
 				System.out.println("2:" + musica.getCodigo() + ", " + musica.getTitulo() + ", " + musica.getAno() + ", "
 						 + ", " + musica.getCa() + ", " + musica.getDuracao());
 			} else
 				System.out.println("2: Erro-musica com codigo repetido " + codigo);
-			System.out.println("digite codigo");
-			codigo = sc.nextInt();
+			//System.out.println("digite codigo");
+			codigo = entrada.nextInt();
 
 		}
 
 	}
 
 	public void MostraDadosDeMidia(){
-		int codigo= sc.nextInt();
+		int codigo= entrada.nextInt();
 		if(midiateca.consultaPorCodigo(codigo)==null){
 			System.out.println("3:Codigo inexistente.");
 		}else 
@@ -110,7 +125,7 @@ public class ACMEMidia {
 	}
 
 	public void MostraDadosDeMidiaPorCategoria(){
-		Categoria cat= Categoria.valueOf(sc.nextLine());;
+		Categoria cat= Categoria.valueOf(entrada.nextLine());;
 		if(midiateca.consultaPorCategoria(cat)==null){
 			System.out.println("4:Codigo inexistente.");
 		}else 
@@ -122,7 +137,7 @@ public class ACMEMidia {
 	}
 
 	public void MostraDadosDeVideoPorQualidade(){
-		int qualidade= sc.nextInt();;
+		int qualidade= entrada.nextInt();;
 		if(midiateca.consultaPorQualidade(qualidade)==null){
 			System.out.println("5:Codigo inexistente.");
 		}else 
@@ -148,8 +163,8 @@ public class ACMEMidia {
 	}
 
 	public void RemoverMidia(){
-		System.out.println("digite um codigo");
-		int codigo = sc.nextInt();
+		//System.out.println("digite um codigo");
+		int codigo = entrada.nextInt();
 		if(!(midiateca.removeMidia(codigo))){
 			System.out.println("7:Codigo inexistente");
 		}else {
@@ -190,6 +205,29 @@ public class ACMEMidia {
 			 + ", " + musica.getCa() + "," + musica.getDuracao()+","+ musica.calculaLocacao());
 		}
 	}
+
+// Redireciona E/S para arquivos
+    // Chame este metodo para redirecionar a leitura e escrita de dados para arquivos
+    private void redirecionaES() {
+        try {
+            BufferedReader streamEntrada = new BufferedReader(new FileReader(nomeArquivoEntrada));
+            entrada = new Scanner(streamEntrada);   // Usa como entrada um arquivo
+            PrintStream streamSaida = new PrintStream(new File(nomeArquivoSaida), Charset.forName("UTF-8"));
+            System.setOut(streamSaida);             // Usa como saida um arquivo
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        Locale.setDefault(Locale.ENGLISH);   // Ajusta para ponto decimal
+        entrada.useLocale(Locale.ENGLISH);   // Ajusta para leitura para ponto decimal
+    }
+
+    // Restaura E/S padrao de tela(console)/teclado
+    // Chame este metodo para retornar a leitura e escrita de dados para o padrao
+    private void restauraES() {
+        System.setOut(saidaPadrao);
+        entrada = new Scanner(System.in);
+    }
+	
 	
 }
 
