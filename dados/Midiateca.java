@@ -46,7 +46,7 @@ public class Midiateca implements Iterador {
 	public ArrayList<Midia> consultaPorCategoria(Categoria categoria) {
 		ArrayList<Midia>midiasCategoria=new ArrayList<>();
 		for(Midia a : midias){
-			if(a.getCategoria()==categoria){
+			if(a.getCategoria().getNome().equals(categoria)){
 				midiasCategoria.add(a);
 			}
 		}

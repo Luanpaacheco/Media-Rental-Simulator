@@ -71,7 +71,7 @@ public class ACMEMidia {
 				System.out.println("1:" + video.getCodigo() + "," + video.getTitulo() + "," + video.getAno() 
 						 + "," + video.getCa() + "," + video.getQualidade());
 			} else
-				System.out.println("1: Erro-video com codigo repetido " + codigo);
+				System.out.println("1:Erro-video com codigo repetido " + codigo);
 			//System.out.println("digite codigo");
 			codigo = entrada.nextInt();
 
@@ -103,7 +103,7 @@ public class ACMEMidia {
 			if (midiateca.cadastraMidia(musica)) {
 				System.out.println("2:" + musica.getCodigo() + "," + musica.getTitulo() + "," + musica.getAno() +  "," + musica.getCa() + "," + musica.getDuracao());
 			} else
-				System.out.println("2: Erro-musica com codigo repetido " + codigo);
+				System.out.println("2:Erro-musica com codigo repetido " + codigo);
 			//System.out.println("digite codigo");
 			codigo = entrada.nextInt();
 
@@ -129,7 +129,7 @@ public class ACMEMidia {
 			entrada.nextLine();
 		Categoria cat= Categoria.valueOf(entrada.nextLine());
 		if(midiateca.consultaPorCategoria(cat)==null){
-			System.out.println("4:Codigo inexistente.");
+			System.out.println("4:Nenhuma midia encontrada");
 		}else 
 			for(Midia a : midiateca.getMidias()){
 				if(a.getCategoria().equals(cat)){ 
@@ -137,7 +137,7 @@ public class ACMEMidia {
 			}
 		}
 		}catch(Exception e ){
-			System.out.println("4:Codigo inexistente.");
+			System.out.println("4:Nenhuma midia encontrada");
 		}
 		
 	}
@@ -146,7 +146,7 @@ public class ACMEMidia {
 		try{
 			int qualidade= entrada.nextInt();;
 		if(midiateca.consultaPorQualidade(qualidade)==null){
-			System.out.println("5:Codigo inexistente.");
+			System.out.println("5:Qualidade inexistente.");
 		}else 
 			for(Video video : midiateca.consultaPorQualidade(qualidade) ){
 				System.out.println("5:" + video.getCodigo() + "," + video.getTitulo() + "," + video.getAno() + ","
@@ -173,7 +173,7 @@ public class ACMEMidia {
 			}else 
 				System.out.println("6:Nenhuma música encontrada.");
 		}catch(Exception e){
-			System.out.println("6:Nenhuma música encontrada.");
+			System.out.println("erro.");
 		}
 		
 	}
@@ -187,7 +187,7 @@ public class ACMEMidia {
 				TestaObj(midiateca.consultaPorCodigo(codigo), 7);
 				midiateca.removeMidia(codigo);
 				
-			}else System.out.println("7:erro");
+			}else System.out.println("7:Codigo inexistente");
 		}catch(Exception e){
 			System.out.println("erro"+ e.getMessage()+" "+e.getLocalizedMessage());
 		}
