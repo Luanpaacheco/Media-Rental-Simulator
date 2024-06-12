@@ -71,7 +71,7 @@ public class ACMEMidia {
 				System.out.println("1:" + video.getCodigo() + "," + video.getTitulo() + "," + video.getAno() 
 						 + "," + video.getCa() + "," + video.getQualidade());
 			} else
-				System.out.println("1:Erro-video com codigo repetido " + codigo);
+				System.out.println("1:Erro-video com codigo repetido: " + codigo);
 			//System.out.println("digite codigo");
 			codigo = entrada.nextInt();
 
@@ -103,7 +103,7 @@ public class ACMEMidia {
 			if (midiateca.cadastraMidia(musica)) {
 				System.out.println("2:" + musica.getCodigo() + "," + musica.getTitulo() + "," + musica.getAno() +  "," + musica.getCa() + "," + musica.getDuracao());
 			} else
-				System.out.println("2:Erro-musica com codigo repetido " + codigo);
+				System.out.println("2:Erro-musica com codigo repetido: " + codigo);
 			//System.out.println("digite codigo");
 			codigo = entrada.nextInt();
 
@@ -138,7 +138,7 @@ public class ACMEMidia {
 			}
 		}
 		}catch(Exception e ){
-			System.out.println("4:Nenhuma midia encontrada ERRO");
+			System.out.println("4:Nenhuma midia encontrada");
 		}
 		
 	}
@@ -170,7 +170,7 @@ public class ACMEMidia {
 						}
 					}
 				}
-				System.out.println("6:" + maior.getTitulo()+","+maior.getDuracao());
+				System.out.println("6:" + maior.getTitulo()+","+deci.format(maior.getDuracao()));
 			}else 
 				System.out.println("6:Nenhuma música encontrada.");
 		}catch(Exception e){
@@ -221,7 +221,7 @@ public class ACMEMidia {
 		}else  {
 			Musica musica = (Musica) x;
 			System.out.println(n+":" + musica.getCodigo() + "," + musica.getTitulo() + "," + musica.getAno()
-			 + "," + musica.getCa() + "," + musica.getDuracao()+","+ deci.format(musica.calculaLocacao()));
+			 + "," + musica.getCa() + "," + deci.format(musica.getDuracao())+","+ deci.format(musica.calculaLocacao()));
 		}
 	}
 
