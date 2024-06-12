@@ -1,6 +1,8 @@
 package dados;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Midiateca implements Iterador {
 
@@ -46,7 +48,7 @@ public class Midiateca implements Iterador {
 	public ArrayList<Midia> consultaPorCategoria(Categoria categoria) {
 		ArrayList<Midia>midiasCategoria=new ArrayList<>();
 		for(Midia a : midias){
-			if(a.getCategoria().getNome().equals(categoria)){
+			if(a.getCategoria().equals(categoria)){
 				midiasCategoria.add(a);
 			}
 		}

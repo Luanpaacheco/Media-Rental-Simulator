@@ -126,6 +126,7 @@ public class ACMEMidia {
 
 	public void MostraDadosDeMidiaPorCategoria(){
 		try{
+			
 			entrada.nextLine();
 		Categoria cat= Categoria.valueOf(entrada.nextLine());
 		if(midiateca.consultaPorCategoria(cat)==null){
@@ -137,7 +138,7 @@ public class ACMEMidia {
 			}
 		}
 		}catch(Exception e ){
-			System.out.println("4:Nenhuma midia encontrada");
+			System.out.println("4:Nenhuma midia encontrada ERRO");
 		}
 		
 	}
@@ -150,7 +151,7 @@ public class ACMEMidia {
 		}else 
 			for(Video video : midiateca.consultaPorQualidade(qualidade) ){
 				System.out.println("5:" + video.getCodigo() + "," + video.getTitulo() + "," + video.getAno() + ","
-				 + video.getCa() + "," + video.getQualidade()+","+video.calculaLocacao());
+				 + video.getCa() + "," + video.getQualidade()+","+deci.format(video.calculaLocacao()));
 			}
 		}catch(Exception e){
 			System.out.println("erro");
@@ -210,9 +211,9 @@ public class ACMEMidia {
 			System.out.println("8:"+soma);
 		}
 	}
+	DecimalFormat deci=new DecimalFormat("0.00");
 
 	public void TestaObj(Midia x,int n){
-		DecimalFormat deci=new DecimalFormat("0.00");
 		if(x instanceof Video){
 			Video video = (Video)x;
 			System.out.println(n+":" + video.getCodigo() + "," + video.getTitulo() + "," + video.getAno() 
